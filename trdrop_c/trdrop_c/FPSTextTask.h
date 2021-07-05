@@ -121,7 +121,7 @@ namespace trdrop {
 
 				const cv::Size			 writerFrameSize;
 				const int				 textThicknessRatio = 580;   // 1920 / 4 - initial thickness
-				const double             textSizeRatio = 1920;  // 1920 / 1 - initial size
+				const double             textSizeRatio = 1280;  // 1920 / 1 - initial size
 
 				std::vector<int>         videoIxs;
 
