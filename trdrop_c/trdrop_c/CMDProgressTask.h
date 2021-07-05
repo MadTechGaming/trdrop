@@ -8,7 +8,7 @@
 #include <iomanip>
 #include <string>
 
-#include <opencv2\core\core.hpp>
+#include <C:\dev\opencv2\core\core.hpp>
 
 #include "Tasks.h"
 #include "util.h"

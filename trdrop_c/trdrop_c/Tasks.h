@@ -4,7 +4,7 @@
 
 #include <functional>
 
-#include <opencv2/core.hpp>
+#include <C:\dev\opencv2/core.hpp>
 
 namespace trdrop {
 	namespace tasks {

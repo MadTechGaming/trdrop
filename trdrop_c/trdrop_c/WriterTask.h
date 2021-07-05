@@ -6,8 +6,8 @@
 #include <math.h>
 #include <sstream>
 #include <iomanip>
-#include <opencv2\core\core.hpp>
-#include <opencv2/highgui/highgui.hpp>  // VideoWriter
+#include <C:\dev\opencv2\core\core.hpp>
+#include <C:\dev\opencv2/highgui/highgui.hpp>  // VideoWriter
 
 #include "Tasks.h"
 

@@ -20,10 +20,10 @@
 #include <functional>
 #include <cstdlib>
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/flann/logger.h>
+#include <C:\dev\opencv2/core/core.hpp>
+#include <C:\dev\opencv2/highgui/highgui.hpp>
+#include <C:\dev\opencv2/imgproc/imgproc.hpp>
+#include <C:\dev\opencv2/flann/logger.h>
 
 #include "framealgorithm.h"
 #include "util.h"

@@ -7,9 +7,9 @@
 #include <future>
 #include <memory>
 
-#include <opencv2/core.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include <C:\dev\opencv2/core.hpp>
+#include <C:\dev\opencv2/imgproc/imgproc.hpp>
+#include <C:\dev\opencv2/highgui/highgui.hpp>
 
 #include "Tasks.h"
 #include "Config.h"

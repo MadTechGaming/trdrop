@@ -8,8 +8,8 @@
 
 // #include <windows.h> // non portable
 
-#include <opencv2/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include <C:\dev\opencv2/core.hpp>
+#include <C:\dev\opencv2/highgui/highgui.hpp>
 
 namespace trdrop {
 	namespace util {

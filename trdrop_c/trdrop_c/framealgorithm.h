@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include<opencv2/core/core.hpp>
+#include<C:\dev\opencv2/core/core.hpp>
 
 #include "util.h"
 
