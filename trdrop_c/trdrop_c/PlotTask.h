@@ -85,6 +85,8 @@ namespace trdrop {
 					drawGrid(res);
 					drawLines(res);
 					drawTears(res);
+					drawFrametimes(res);
+
 #if _TR_DEBUG
 					std::cout << "DEBUG - PlotTask - drew the plot\n";
 #endif
@@ -144,6 +146,7 @@ namespace trdrop {
 					int fpsSpriteXOffset = writerFrameSize.width / fpsSpriteXScaleRatio;
 					int fpsSpriteYOffset = writerFrameSize.width / fpsSpriteYScaleRatio;
 
+					// frame sprite
 					cv::resize(fps_sprite, fps_sprite, cv::Size(fpsSpriteWScale, fpsSpriteHScale));
 					util::overlayImage(res, fps_sprite, res, cv::Point2i(x - fpsSpriteXOffset, y - fpsSpriteYOffset - overhead));
 
@@ -222,8 +225,6 @@ namespace trdrop {
 					return fps;
 				};
 
-
-				/*
 				std::function<void(cv::Mat & res)> drawFrametimes = [&](cv::Mat & res) {
 
 					int pointDistance = margin + 6;
@@ -233,19 +234,19 @@ namespace trdrop {
 					cv::Point lastPoint(pointDistance, baseHeight);
 					std::vector<cv::Point> lastPoints(fpsTaskData.videoCount, lastPoint);
 
-					util::enumerate(timeContainer[0].begin(), timeContainer[0].end(), 0, [&](unsigned i, double time) {
-						util::enumerate(timeContainer.begin(), timeContainer.end(), 0, [&](unsigned vix, std::deque<double> timeDeque) {
+					util::enumerate(timeContainer[0].begin(), timeContainer[0].end(), 0, [&](size_t i, double time) {
+						util::enumerate(timeContainer.begin(), timeContainer.end(), 0, [&](size_t vix, std::deque<double> timeDeque) {
 							int currentTime = static_cast<int>(timeDeque[i]);
 							int y = (60 - currentTime*height / 60) + baseHeight - 60;
+							int lineThickness = writerFrameSize.width / lineThicknessRatio;
 							cv::Point currentPoint(pointDistance, y);
 							if (i == 0) lastPoints[vix] = currentPoint;
-							cv::line(res, lastPoints[vix], currentPoint, colors[vix], 2, CV_AA);
+							cv::line(res, lastPoints[vix], currentPoint, colors[vix], lineThickness, CV_AA);
 							lastPoints[vix] = currentPoint;
 						});
 						pointDistance += pointDistanceIncrement;
 					});
 				};
-				*/
 
 				// private member
 			private:
