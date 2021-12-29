@@ -26,6 +26,7 @@ jobs:
           gdown --id 1D0Op3M9LMxfDmjgsomGhki4hTAm4FKof --output C:\downloads\opencv-4.5.1.7z
           7z -r x C:\downloads\opencv-4.5.1.7z -oc:\downloads\
           $env:OpenCV_Dir=C:\downloads\opencv-4.5.1
+          echo "OpenCV_Dir=C:\downloads\opencv-4.5.1" >> $GITHUB_ENV
           ls $OpenCV_DIR
 
       - name: Install Qt
@@ -38,12 +39,6 @@ jobs:
           install-deps: 'true'
           dir: 'C:'
           tools: 'tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.'
-
-      - name: Add Qt to environment variable
-        run: |
-          ls C:\Qt
-          ls C:\Qt\5.15.2\mingw81_64\bin
-          $env:Qt_Install=C:\Qt
 
       - name: Build Trdrop
         run: |
