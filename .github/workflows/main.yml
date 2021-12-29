@@ -25,7 +25,6 @@ jobs:
           pip install gdown
           gdown --id 1D0Op3M9LMxfDmjgsomGhki4hTAm4FKof --output C:\downloads\opencv-4.5.1.7z
           7z -r x C:\downloads\opencv-4.5.1.7z -oc:\downloads\
-          $env:OpenCV_Dir=C:\downloads\opencv-4.5.1
           echo "OpenCV_Dir=C:\downloads\opencv-4.5.1" >> $GITHUB_ENV
           ls $OpenCV_DIR
 
