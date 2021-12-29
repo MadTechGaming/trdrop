@@ -14,8 +14,8 @@ steps:
   - uses: actions/cache@v2
     id: cache
     with:
-      path: | 
-        C:\downloads\opencv-4.5.1\
+      path: |
+        C:\downloads\opencv-4.5.1
         C:\Qt
       key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
