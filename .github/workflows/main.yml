@@ -26,6 +26,8 @@ jobs:
           gdown --id 1D0Op3M9LMxfDmjgsomGhki4hTAm4FKof --output C:\downloads\opencv-4.5.1.7z
           7z -r x C:\downloads\opencv-4.5.1.7z -oc:\downloads\
           Set-Content -Path OpenCV_DIR C:\downloads\opencv-4.5.1\
+          Get-Content -Path OpenCV_DIR
+          ls $OpenCV_DIR
           
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
