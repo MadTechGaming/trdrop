@@ -57,5 +57,5 @@ jobs:
 
       - name: Cleanup for packaging
         run: |
-          remove-item $env:GITHUB_WORKSPACE\release\* -include *.cpp, *.c, *.o, *.h -exclude *.exe, *.dll
+          remove-item $env:GITHUB_WORKSPACE\release\* -include *.cpp, *.c, *.h, *.o -exclude *.exe, *.dll
           ls $env:GITHUB_WORKSPACE\release
