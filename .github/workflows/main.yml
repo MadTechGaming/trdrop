@@ -40,7 +40,7 @@ jobs:
       # Todo: cleanup release folder for less bloat
       - name: Package trdrop for artifact
         run: |
-          copy-item $env:OpenCV_DIR\build_64\install\x64\mingw\bin\*.dll $env:GITHUB_WORKSPACE\release$env:GITHUB_WORKSPACE\release
+          copy-item $env:OpenCV_DIR\build_64\install\x64\mingw\bin\*.dll $env:GITHUB_WORKSPACE\release
           copy-item C:\msys64\mingw64\bin\*.dll $env:GITHUB_WORKSPACE\release
           windeployqt.exe --qmldir $env:GITHUB_WORKSPACE $env:GITHUB_WORKSPACE\release
 
