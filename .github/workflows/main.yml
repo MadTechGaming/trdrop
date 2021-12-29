@@ -46,6 +46,9 @@ jobs:
       # Todo: cleanup release folder for less bloat
       - name: Package trdrop for artifact 
         run: |
-          copy $OpenCV_Dir\build_64\install\x64\mingw\bin\*.dll D:\a\trdrop\trdrop\release
-          copy $Qt_Install\Tools\mingw810_64\bin\*.dll D:\a\trdrop\trdrop\release
-          windeployqt.exe --qmldir ..\..\trdrop D:\a\trdrop\trdrop\release
+          copy $env:OpenCV_DIR\build_64\install\x64\mingw\bin\*.dll D:\a\trdrop\trdrop\release
+          copy $env:Qt_Install\Tools\mingw810_64\bin\*.dll D:\a\trdrop\trdrop\release
+          windeployqt.exe --qmldir D:\a\trdrop\trdrop D:\a\trdrop\trdrop\release
+          ls D:\a\trdrop\trdrop\release
+          ls D:\a\trdrop\trdrop
+
