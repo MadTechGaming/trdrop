@@ -19,7 +19,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Download Precompiled OpenCV 4.5.1 (Win64)
+      - name: Download Precompiled OpenCV 4.5.1
         run: |
           mkdir C:\downloads
           pip install gdown
@@ -47,7 +47,7 @@ jobs:
           Set-Content -Path Qt_Install C:\Qt
           Get-Content -Path Qt_Install
 
-      - name: Build Trdrop for Win64
+      - name: Build Trdrop
         run: |
           D:
           cd D:\a\trdrop\trdrop
