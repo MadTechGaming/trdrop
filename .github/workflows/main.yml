@@ -48,9 +48,9 @@ jobs:
         run: |
           remove-item $env:GITHUB_WORKSPACE\release\* -include *.cpp, *.c, *.o -exclude *.exe, *.dll
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: trdrop-release
-        path: release\*
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: trdrop-release
+          path: release/*
 
