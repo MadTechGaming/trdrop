@@ -58,6 +58,7 @@ jobs:
       # Todo: cleanup release folder for less bloat
       - name: Package trdrop for artifact 
         run: |
+          cmd
           D:
           cd D:\a\trdrop\trdrop\release
           copy %OpenCV_Dir%\build_64\install\x64\mingw\bin\*.dll .
