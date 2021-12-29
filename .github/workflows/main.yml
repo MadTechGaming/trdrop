@@ -34,8 +34,6 @@ jobs:
 
       - name: Build Trdrop
         run: |
-          D:
-          cd D:\a\trdrop\trdrop
           qmake.exe        -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
           mingw32-make.exe -f Makefile.Release
 
@@ -43,9 +41,9 @@ jobs:
       - name: Package trdrop for artifact
         run: |
           copy-item $env:OpenCV_DIR\build_64\install\x64\mingw\bin\*.dll D:\a\trdrop\trdrop\release
-          ls D:\a\trdrop\trdrop\release
+          ls $env:GITHUB_WORKSPACE\release 
           copy-item C:\msys64\mingw64\bin\*.dll D:\a\trdrop\trdrop\release
-          ls D:\a\trdrop\trdrop\release
+          ls $env:GITHUB_WORKSPACE\release
           windeployqt.exe --qmldir D:\a\trdrop\trdrop D:\a\trdrop\trdrop\release
 
       - name: Cleanup for packaging
