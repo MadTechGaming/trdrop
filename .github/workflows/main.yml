@@ -1,24 +1,16 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Build and publish artifacts
 
-# Controls when the workflow will run
 on: [push, pull_request]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: windows-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
+      # Todo use deflate for packed bins to save time on decompression
       - name: Download Precompiled OpenCV 4.5.1
         run: |
           mkdir C:\downloads
@@ -26,8 +18,6 @@ jobs:
           gdown --id 1D0Op3M9LMxfDmjgsomGhki4hTAm4FKof --output C:\downloads\opencv-4.5.1.7z
           7z -r x C:\downloads\opencv-4.5.1.7z -oc:\downloads\
           echo OpenCV_DIR="C:\downloads\opencv-4.5.1" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
-          
-          ls $OpenCV_DIR
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
@@ -52,8 +42,6 @@ jobs:
           cd D:\a\trdrop\trdrop
           qmake.exe        -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
           mingw32-make.exe -f Makefile.Release
-          ls 
-          ls release
 
       # Todo: cleanup release folder for less bloat
       - name: Package trdrop for artifact 
