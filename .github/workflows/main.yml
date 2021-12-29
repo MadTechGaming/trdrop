@@ -11,7 +11,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: windows-latest
-    
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -25,10 +25,10 @@ jobs:
           pip install gdown
           gdown --id 1D0Op3M9LMxfDmjgsomGhki4hTAm4FKof --output C:\downloads\opencv-4.5.1.7z
           7z -r x C:\downloads\opencv-4.5.1.7z -oc:\downloads\
-          Set-Content -Path OpenCV_DIR C:\downloads\opencv-4.5.1\
+          Set-Content -Path OpenCV_DIR C:\downloads\opencv-4.5.1
           Get-Content -Path OpenCV_DIR
           ls $OpenCV_DIR
-          
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
@@ -40,7 +40,7 @@ jobs:
           dir: 'C:'
           tools: 'tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.'
 
-      - name: Add Qt to our env.var
+      - name: Add Qt to environment variable
         run: |
           ls C:\Qt
           ls C:\Qt\5.15.2\mingw81_64\bin
