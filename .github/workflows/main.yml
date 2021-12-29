@@ -16,8 +16,8 @@ jobs:
         id: cache
         with:
           path: |
-            C:\downloads\opencv-4.5.1
-            C:\Qt
+            C:\downloads\opencv-4.5.1\build_64
+            C:\Qt\5.15.2
           key: ${{ runner.os }}-Qt5152-OpenCV451
 
       # Todo: use store for packed libs to save time on decompression
@@ -58,3 +58,4 @@ jobs:
       - name: Cleanup for packaging
         run: |
           remove-item $env:GITHUB_WORKSPACE\release\* -include *.cpp, *.c, *.o, *.h -exclude *.exe, *.dll
+          ls $env:GITHUB_WORKSPACE\release
