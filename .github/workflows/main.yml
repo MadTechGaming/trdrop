@@ -10,8 +10,44 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      # Todo use deflate for packed bins to save time on decompression
+      - name: Download Precompiled OpenCV 4.5.1
+        run: |
+          mkdir C:\downloads
+          pip install gdown
+          gdown --id 1D0Op3M9LMxfDmjgsomGhki4hTAm4FKof --output C:\downloads\opencv-4.5.1.7z
+          7z -r x C:\downloads\opencv-4.5.1.7z -oc:\downloads\
+          echo OpenCV_DIR="C:\downloads\opencv-4.5.1" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.2'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_mingw81'
+          install-deps: 'true'
+          dir: 'C:'
+          tools: 'tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.'
+
+      - name: Add Qt to environment variable
+        run: |
+          ls C:\Qt
+          ls C:\Qt\5.15.2\mingw81_64\bin
+          echo Qt_Install="C:\Qt" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Build Trdrop
+        run: |
+          D:
+          cd D:\a\trdrop\trdrop
+          qmake.exe        -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+          mingw32-make.exe -f Makefile.Release
 
       # Todo: cleanup release folder for less bloat
-      - name: list
+      - name: Package trdrop for artifact 
         run: |
-           ls C:\msys64\mingw64\bin *.dll
+          copy $env:OpenCV_DIR\build_64\install\x64\mingw\bin\*.dll D:\a\trdrop\trdrop\release
+          ls D:\a\trdrop\trdrop\release
+          copy C:\msys64\mingw64\bin\*.dll D:\a\trdrop\trdrop\release
+          windeployqt.exe --qmldir D:\a\trdrop\trdrop D:\a\trdrop\trdrop\release
+          ls D:\a\trdrop\trdrop\release
