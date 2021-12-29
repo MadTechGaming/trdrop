@@ -14,4 +14,4 @@ jobs:
       # Todo: cleanup release folder for less bloat
       - name: list
         run: |
-           ls C:\msys64\mingw64\bin
+           ls C:\msys64\mingw64\bin *.dll
