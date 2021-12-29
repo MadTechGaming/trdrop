@@ -40,6 +40,12 @@ jobs:
           dir: 'C:'
           tools: 'tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.'
 
+      - name: Add Qt to environment variable
+        run: |
+          ls C:\Qt
+          ls C:\Qt\5.15.2\mingw81_64\bin
+          echo Qt_Install="C:\Qt" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+
       - name: Build Trdrop
         run: |
           D:
@@ -48,3 +54,12 @@ jobs:
           mingw32-make.exe -f Makefile.Release
           ls 
           ls release
+
+      # Todo: cleanup release folder for less bloat
+      - name: Package trdrop for artifact 
+        run: |
+          D:
+          cd D:\a\trdrop\trdrop\release
+          copy %OpenCV_Dir%\build_64\install\x64\mingw\bin\*.dll .
+          copy %Qt_Install%\Tools\mingw810_64\bin\*.dll .
+          windeployqt.exe --qmldir ..\..\trdrop .          
