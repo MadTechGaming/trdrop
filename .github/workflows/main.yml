@@ -65,6 +65,13 @@ jobs:
           Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
           7z a -m0=LZMA2 -mx9 ..\trdrop-release-${env:SHORT_SHA}.7z
 
+      - name: upload release
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $asset=trdrop-release-${env:SHORT_SHA}.7z
+          $title=Trdrop Release - ${env:SHORT_SHA}
+          gh release create $tag $asset --target $env:GITHUB_SHA -t $title
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
