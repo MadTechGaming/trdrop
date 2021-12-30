@@ -51,7 +51,8 @@ jobs:
       # Todo: cleanup release folder for less bloat
       - name: Package trdrop for artifact
         run: |
-          copy-item $env:OpenCV_DIR\build_64\install\x64\mingw\bin\*.dll $env:GITHUB_WORKSPACE\release
+          cd $env:OpenCV_DIR\build_64\install\x64\mingw\bin
+          copy-item libopencv_core451.dll libopencv_imgcodecs451.dll libopencv_imgproc451.dll libopencv_videoio451.dll -Destination $env:GITHUB_WORKSPACE\release
           windeployqt.exe --qmldir $env:GITHUB_WORKSPACE $env:GITHUB_WORKSPACE\release
 
       - name: Cleanup for packaging
@@ -75,5 +76,5 @@ jobs:
         with:
           name: trdrop-release
           path: release/*
-          retention-days: 1 # testing only
+          retention-days: 1
 
