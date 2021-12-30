@@ -12,8 +12,7 @@ jobs:
           fetch-depth: 0
 
       - name: Get short SHA
-        run: |
-          echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+        run: echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" >> $env:GITHUB_ENV
 
       - name: Download Precompiled OpenCV 4.5.1 libs
         run: |
@@ -38,8 +37,8 @@ jobs:
 
       - name: Build Trdrop
         run: |
-          qmake.exe        -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
-          mingw32-make.exe -f Makefile.Release
+          qmake -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+          mingw32-make -f Makefile.Release
 
       - name: Prepare trdrop for artifact
         run: |
@@ -63,6 +62,7 @@ jobs:
         with:
           name: trdrop-release-${{ env.SHORT_SHA }}
           path: release/*
+          if-no-files-found: error
           retention-days: 1
 
       - uses: svenstaro/upload-release-action@1d71c233f746f1dbd928efaf6de63056aa65f6eb
