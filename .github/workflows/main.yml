@@ -66,7 +66,7 @@ jobs:
           7z a -m0=LZMA2 -mx9 ..\trdrop-release-${env:SHORT_SHA}.7z
 
       - name: upload release
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           $asset=trdrop-release-${env:SHORT_SHA}.7z
           $title=Trdrop Release - ${env:SHORT_SHA}
