@@ -19,7 +19,7 @@ jobs:
           mkdir C:\downloads
           $opencv_ver="4.5.1"
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver}/opencv-${opencv_ver}.7z -o C:\downloads\opencv-${opencv_ver}.7z
-          7z -r x C:\downloads\opencv-${opencv_ver}.7z -oc:\downloads\opencv-${opencv_ver}\
+          7z -r x C:\downloads\opencv-${opencv_ver}.7z -oc:\downloads\
           ls C:\downloads\
           ls C:\downloads\opencv-${opencv_ver}
           ls C:\downloads\opencv-${opencv_ver}\build_64
