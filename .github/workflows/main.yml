@@ -70,7 +70,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: github.event_name != 'pull_request'
         run: |
-          $asset=trdrop-release-$env:SHORT_SHA.7z
+          $asset="trdrop-release-$env:SHORT_SHA.7z"
           $title="Trdrop Release - $env:SHORT_SHA"
           gh release create $tag $asset --target $env:GITHUB_SHA -t $title
 
