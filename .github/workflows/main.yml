@@ -15,6 +15,60 @@ jobs:
         run: |
           echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
 
-      - name: Get short SHA 1
-        run: echo $Env:SHORT_SHA
+      - name: Download Precompiled OpenCV 4.5.1 libs
+        run: |
+          mkdir C:\downloads
+          pip install gdown
+          gdown --id 11FJJxPZMBZR_4MW7pL3CEjFw0ZrAnnea --output C:\downloads\opencv-4.5.1.7z
+          7z -r x C:\downloads\opencv-4.5.1.7z -oc:\downloads\
+          echo OpenCV_DIR="C:\downloads\opencv-4.5.1" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.15.2'
+          arch: 'win64_mingw81'
+          dir: 'C:'
+          tools: 'tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.'
+
+      - name: Add Qt and MinGW to environment variable
+        run: |
+          echo Qt_Install="C:\Qt" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+          echo MinGWBin="C:\msys64\mingw64\bin" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Build Trdrop
+        run: |
+          qmake.exe        -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+          mingw32-make.exe -f Makefile.Release
+
+      - name: Package trdrop for artifact
+        run: |
+          cd $env:MinGWBin
+          cp libgcc_s_seh-1.dll, libstdc++-6.dll, libwinpthread-1.dll, libgomp-1.dll $env:GITHUB_WORKSPACE\release
+          cd $env:OpenCV_DIR\build_64\install\x64\mingw\bin
+          cp libopencv_core451.dll, libopencv_imgcodecs451.dll, libopencv_imgproc451.dll, libopencv_videoio451.dll, opencv_videoio_ffmpeg451_64.dll $env:GITHUB_WORKSPACE\release
+          windeployqt.exe --qmldir $env:GITHUB_WORKSPACE $env:GITHUB_WORKSPACE\release
+
+      - name: Cleanup for packaging
+        run: |
+          Remove-Item $env:GITHUB_WORKSPACE\release\* -include *.c, *.cpp, *.h, *.o -exclude *.exe, *.dll
+          cd $env:GITHUB_WORKSPACE\release
+          Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: trdrop-release-${{ env.SHORT_SHA }}
+          path: release/*
+          retention-days: 1
+
+      - uses: svenstaro/upload-release-action@1d71c233f746f1dbd928efaf6de63056aa65f6eb
+        if: github.event_name != 'pull_request'
+        with:
+          release_name: Trdrop - ${{ env.SHORT_SHA }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: /*.7z
+          tag: ${{ env.SHORT_SHA }}
+          overwrite: true
+          file_glob: true
 
