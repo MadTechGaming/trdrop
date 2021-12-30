@@ -52,7 +52,7 @@ jobs:
       - name: Package trdrop for artifact
         run: |
           cd $env:OpenCV_DIR\build_64\install\x64\mingw\bin
-          copy-item libopencv_core451.dll libopencv_imgcodecs451.dll libopencv_imgproc451.dll libopencv_videoio451.dll -Destination $env:GITHUB_WORKSPACE\release
+          cp libopencv_core451.dll, libopencv_imgcodecs451.dll, libopencv_imgproc451.dll, libopencv_videoio451.dll $env:GITHUB_WORKSPACE\release
           windeployqt.exe --qmldir $env:GITHUB_WORKSPACE $env:GITHUB_WORKSPACE\release
 
       - name: Cleanup for packaging
