@@ -72,6 +72,7 @@ jobs:
         run: |
           $asset="trdrop-release-$env:SHORT_SHA.7z"
           $title="Trdrop Release - $env:SHORT_SHA"
+          $tag=$env:SHORT_SHA
           gh release create $tag $asset --target $env:GITHUB_SHA -t $title
 
       - name: Upload artifact
