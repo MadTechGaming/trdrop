@@ -53,9 +53,7 @@ jobs:
           Remove-Item release\* -include *.c, *.cpp, *.h, *.o -exclude *.exe, *.dll
           cd release
           Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
-          cd ..
-          7z a release\* -m0=LZMA2 -mx9 trdrop-release.7z
-          Rename-Item trdrop-release.7z trdrop-release-$Env:SHORT_SHA.7z
+          7z a -m0=LZMA2 -mx9 ..\trdrop-release-${env:SHORT_SHA}.7z
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
