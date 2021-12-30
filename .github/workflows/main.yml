@@ -68,7 +68,6 @@ jobs:
           rm -r -fo mediaservice
           rm -r -fo playlistformats
           rm -r -fo qmltooling
-          rm -r -fo Qt
           rm -r -fo QtGraphicalEffects
           rm -r -fo styles
           rm -r -fo translations
