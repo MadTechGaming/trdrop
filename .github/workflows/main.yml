@@ -19,7 +19,7 @@ jobs:
       - name: Compile OpenCV
         run: |
           mkdir C:\downloads\opencv-4.5.1\build_64
-          cp -y .ci\CMakeLists.txt C:\downloads\opencv-4.5.1\
+          cp .ci\CMakeLists.txt C:\downloads\opencv-4.5.1\
           
           
 
