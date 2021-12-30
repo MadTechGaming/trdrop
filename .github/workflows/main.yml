@@ -57,6 +57,7 @@ jobs:
           7z a -m0=LZMA2 -mx9 ..\trdrop-release.7z
           cd ..
           Rename-Item trdrop-release.7z trdrop-release-$Env:SHORT_SHA.7z
+          ls
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -70,7 +71,7 @@ jobs:
         with:
           release_name: Trdrop - ${{ env.SHORT_SHA }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /*.7z
+          file: *.7z
           tag: ${{ env.SHORT_SHA }}
           overwrite: true
           file_glob: true
