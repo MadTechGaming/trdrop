@@ -14,15 +14,12 @@ jobs:
       - name: Get short SHA
         run: echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" >> $env:GITHUB_ENV
 
-      - name: Download OpenCV
+      - name: Download Precompiled OpenCV libs
         run: |
           mkdir C:\downloads
           $opencv_ver="4.5.1"
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver}/opencv-${opencv_ver}.7z -o C:\downloads\opencv-${opencv_ver}.7z
           7z -r x C:\downloads\opencv-${opencv_ver}.7z -oc:\downloads\
-          ls C:\downloads\
-          ls C:\downloads\opencv-${opencv_ver}
-          ls C:\downloads\opencv-${opencv_ver}\build_64
           echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver}" >> $env:GITHUB_ENV
 
       - name: Download Qt
@@ -46,9 +43,9 @@ jobs:
       - name: Prepare trdrop for artifact
         run: |
           cd $env:MinGWBin
-          cp libgcc_s_seh-1.dll, libstdc++-6.dll, libwinpthread-1.dll, libgomp-1.dll $env:GITHUB_WORKSPACE\release
+          copy-item libgcc_s_seh-1.dll, libstdc++-6.dll, libwinpthread-1.dll, libgomp-1.dll $env:GITHUB_WORKSPACE\release
           cd $env:OpenCV_DIR\build_64\install\x64\mingw\bin
-          cp libopencv_core451.dll, libopencv_imgcodecs451.dll, libopencv_imgproc451.dll, libopencv_videoio451.dll, opencv_videoio_ffmpeg451_64.dll $env:GITHUB_WORKSPACE\release
+          copy-item libopencv_core451.dll, libopencv_imgcodecs451.dll, libopencv_imgproc451.dll, libopencv_videoio451.dll, opencv_videoio_ffmpeg451_64.dll $env:GITHUB_WORKSPACE\release
           windeployqt --qmldir $env:GITHUB_WORKSPACE $env:GITHUB_WORKSPACE\release
 
       - name: Cleanup for packaging
