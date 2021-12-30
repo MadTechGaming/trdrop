@@ -19,8 +19,8 @@ jobs:
           mkdir C:\downloads
           $opencv_ver="4.5.1"
           curl -fL https://github.com/opencv/opencv/archive/${opencv_ver}.zip -o C:\downloads\opencv-${opencv_ver}.zip
-          7z -r x C:\downloads\opencv-4.5.1.zip -oc:\downloads\
-          echo OpenCV_DIR="C:\downloads\opencv-4.5.1" >> $env:GITHUB_ENV
+          7z -r x C:\downloads\opencv-${opencv_ver}.zip -oc:\downloads\
+          echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver}" >> $env:GITHUB_ENV
 
       - name: Download Qt
         uses: jurplel/install-qt-action@v2
@@ -30,6 +30,7 @@ jobs:
           dir: C:\
           tools: tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.
 
+      # Remote go brr
       - name: Compile OpenCV
         run: |
           mkdir C:\downloads\opencv-4.5.1\build_64
