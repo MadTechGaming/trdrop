@@ -11,28 +11,16 @@ jobs:
         with:
           fetch-depth: 0
 
-    #steps:
-      - uses: actions/cache@v2
-        id: cache
-        with:
-          path: |
-            C:\downloads\opencv-4.5.1\build_64
-            C:\Qt\5.15.2
-          key: ${{ runner.os }}-Qt5152-OpenCV451
-
-      # Todo: use store for packed libs to save time on decompression
       - name: Download Precompiled OpenCV 4.5.1 libs
-        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mkdir C:\downloads
           pip install gdown
-          gdown --id 1D0Op3M9LMxfDmjgsomGhki4hTAm4FKof --output C:\downloads\opencv-4.5.1.7z
+          gdown --id 11FJJxPZMBZR_4MW7pL3CEjFw0ZrAnnea --output C:\downloads\opencv-4.5.1.7z
           7z -r x C:\downloads\opencv-4.5.1.7z -oc:\downloads\
           echo OpenCV_DIR="C:\downloads\opencv-4.5.1" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
-        if: steps.cache.outputs.cache-hit != 'true'
         with:
           version:      '5.15.2'
           arch:         'win64_mingw81'
