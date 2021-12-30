@@ -69,11 +69,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: github.event_name != 'pull_request'
-        run: |
-          $asset="trdrop-release-$env:SHORT_SHA.7z"
-          $title="Trdrop Release - $env:SHORT_SHA"
-          $tag=$env:SHORT_SHA
-          gh release create $tag $asset --target $env:GITHUB_SHA -t $title
+        run: gh release create $env:SHORT_SHA "trdrop-release-$env:SHORT_SHA.7z" --target $env:GITHUB_SHA -t "Trdrop Release - $env:SHORT_SHA"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
