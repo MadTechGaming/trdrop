@@ -53,7 +53,7 @@ jobs:
       - name: Package trdrop for artifact
         run: |
           cd $env:MinGWBin
-          cp libgcc_s_seh-1.dll, libstdc++-6.dll, libwinpthread-1.dll $env:GITHUB_WORKSPACE\release
+          cp libgcc_s_seh-1.dll, libstdc++-6.dll, libwinpthread-1.dll, libgomp-1.dll $env:GITHUB_WORKSPACE\release
           cd $env:OpenCV_DIR\build_64\install\x64\mingw\bin
           cp libopencv_core451.dll, libopencv_imgcodecs451.dll, libopencv_imgproc451.dll, libopencv_videoio451.dll $env:GITHUB_WORKSPACE\release
           windeployqt.exe --qmldir $env:GITHUB_WORKSPACE $env:GITHUB_WORKSPACE\release
@@ -72,6 +72,8 @@ jobs:
           rm -r -fo QtGraphicalEffects
           rm -r -fo styles
           rm -r -fo translations
+          rm -r -fo D3Dcompiler_47.dll
+          rm -r -fo opengl32sw.dll
           ls $env:GITHUB_WORKSPACE\release
 
       - name: Upload artifact
