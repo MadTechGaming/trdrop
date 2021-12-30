@@ -16,10 +16,12 @@ jobs:
           Invoke-WebRequest -Uri https://github.com/opencv/opencv/archive/4.5.1.zip -OutFile C:\downloads\opencv-4.5.1.zip
           7z -r x C:\downloads\opencv-4.5.1.zip -oc:\downloads\
 
+# cmake -G "MinGW Makefiles" -S C:\downloads\opencv-4.5.1\ -B C:\downloads\opencv-4.5.1\build_64\
+
       - name: Compile OpenCV
         run: |
           mkdir C:\downloads\opencv-4.5.1\build_64
-          cp ".ci\CMakeLists.txt" C:\downloads\opencv-4.5.1\
+          cp ci\CMakeLists.txt C:\downloads\opencv-4.5.1\
           
           
 
