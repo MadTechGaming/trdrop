@@ -48,9 +48,9 @@ jobs:
           cd $env:OpenCV_DIR\build_64\install\x64\mingw\bin
           cp libopencv_core451.dll, libopencv_imgcodecs451.dll, libopencv_imgproc451.dll, libopencv_videoio451.dll, opencv_videoio_ffmpeg451_64.dll $env:GITHUB_WORKSPACE\release
           windeployqt.exe --qmldir $env:GITHUB_WORKSPACE $env:GITHUB_WORKSPACE\release
-          Remove-Item $env:GITHUB_WORKSPACE\release\* -include *.c, *.cpp, *.h, *.o -exclude *.exe, *.dll
           cd $env:GITHUB_WORKSPACE\release
-          Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
+          Remove-Item -include *.c, *.cpp, *.h, *.o -exclude *.exe, *.dll
+          Remove-Item -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
           7z a -m0=LZMA2 -mx9 ..\trdrop-release.7z
           cd ..
           Rename-Item trdrop-release.7z trdrop-release-$Env:SHORT_SHA.7z
