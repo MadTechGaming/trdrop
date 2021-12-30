@@ -99,7 +99,7 @@ BUILD_ITT:BOOL=OFF
 BUILD_JASPER:BOOL=ON
 
 //Enable Java support
-BUILD_JAVA:BOOL=ON
+BUILD_JAVA:BOOL=OFF
 
 //Build libjpeg from source
 BUILD_JPEG:BOOL=ON
@@ -185,7 +185,7 @@ BUILD_opencv_imgproc:BOOL=ON
 
 //Include opencv_java_bindings_generator module into the OpenCV
 // build
-BUILD_opencv_java_bindings_generator:BOOL=ON
+BUILD_opencv_java_bindings_generator:BOOL=OFF
 
 //Build JavaScript bindings by Emscripten
 BUILD_opencv_js:BOOL=OFF
@@ -208,7 +208,7 @@ BUILD_opencv_photo:BOOL=ON
 
 //Include opencv_python_bindings_generator module into the OpenCV
 // build
-BUILD_opencv_python_bindings_generator:BOOL=ON
+BUILD_opencv_python_bindings_generator:BOOL=OFF
 
 //Include opencv_python_tests module into the OpenCV build
 BUILD_opencv_python_tests:BOOL=ON
@@ -248,7 +248,7 @@ CMAKE_AR:FILEPATH=C:/msys64/mingw64/bin/ar.exe
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
-CMAKE_BUILD_TYPE:STRING=
+CMAKE_BUILD_TYPE:STRING=Release
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -963,7 +963,7 @@ WITH_OPENCLAMDBLAS:BOOL=ON
 WITH_OPENCLAMDFFT:BOOL=ON
 
 //Include NVIDIA OpenCL D3D11 support
-WITH_OPENCL_D3D11_NV:BOOL=ON
+WITH_OPENCL_D3D11_NV:BOOL=OFF
 
 //Include OpenCL Shared Virtual Memory support
 WITH_OPENCL_SVM:BOOL=OFF
@@ -972,7 +972,7 @@ WITH_OPENCL_SVM:BOOL=OFF
 WITH_OPENEXR:BOOL=ON
 
 //Include OpenGL support
-WITH_OPENGL:BOOL=OFF
+WITH_OPENGL:BOOL=ON
 
 //Include JPEG2K support (OpenJPEG)
 WITH_OPENJPEG:BOOL=ON
@@ -1005,7 +1005,7 @@ WITH_PTHREADS_PF:BOOL=ON
 WITH_PVAPI:BOOL=OFF
 
 //Build with Qt Backend support
-WITH_QT:BOOL=OFF
+WITH_QT:BOOL=ON
 
 //Include library QR-code decoding
 WITH_QUIRC:BOOL=ON
