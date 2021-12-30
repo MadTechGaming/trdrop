@@ -1,4 +1,4 @@
-name: Build and publish
+name: (Windows x64) Build and publish
 
 on: [push, pull_request]
 
@@ -57,7 +57,6 @@ jobs:
           7z a -m0=LZMA2 -mx9 ..\trdrop-release.7z
           cd ..
           Rename-Item trdrop-release.7z trdrop-release-$Env:SHORT_SHA.7z
-          ls
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
