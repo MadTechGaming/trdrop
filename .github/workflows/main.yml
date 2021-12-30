@@ -71,7 +71,7 @@ jobs:
         with:
           release_name: Trdrop - ${{ env.SHORT_SHA }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /*.7z
+          file: trdrop-release-${{ env.SHORT_SHA }}.7z
           tag: ${{ env.SHORT_SHA }}
           overwrite: true
           file_glob: true
