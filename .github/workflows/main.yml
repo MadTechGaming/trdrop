@@ -13,7 +13,9 @@ jobs:
       - name: Download OpenCV 4.5.1
         run: |
           mkdir C:\downloads
-          curl -fLO https://github.com/opencv/opencv/archive/4.5.1.zip -o C:\downloads\opencv-4.5.1.zip
+          $opencv_ver="4.5.1"
+          curl -fL https://github.com/opencv/opencv/archive/${opencv_ver}.zip -o C:\downloads\opencv-${opencv_ver}.zip
+          7z -r x C:\downloads\opencv-4.5.1.zip -oc:\downloads\
           ls
 
 # cmake -G "MinGW Makefiles" -S C:\downloads\opencv-4.5.1\ -B C:\downloads\opencv-4.5.1\build_64\
