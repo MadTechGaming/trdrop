@@ -18,6 +18,14 @@ jobs:
           7z -r x C:\downloads\opencv-4.5.1.zip -oc:\downloads\
           echo OpenCV_DIR="C:\downloads\opencv-4.5.1" >> $env:GITHUB_ENV
 
+      - name: Download Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: 5.15.2
+          arch: win64_mingw81
+          dir: C:\
+          tools: tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.
+
       - name: Compile OpenCV
         run: |
           mkdir C:\downloads\opencv-4.5.1\build_64
@@ -25,3 +33,4 @@ jobs:
           cd $env:OpenCV_DIR\build_64
           mingw32-make -j 8
           mingw32-make install
+
