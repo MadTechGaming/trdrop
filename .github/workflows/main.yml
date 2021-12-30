@@ -50,7 +50,7 @@ jobs:
           windeployqt.exe --qmldir $env:GITHUB_WORKSPACE $env:GITHUB_WORKSPACE\release
           cd $env:GITHUB_WORKSPACE\release
           Remove-Item \* -include *.c, *.cpp, *.h, *.o -exclude *.exe, *.dll
-          Remove-Item -force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
+          Remove-Item -f -r audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
           7z a -m0=LZMA2 -mx9 ..\trdrop-release.7z
           cd ..
           Rename-Item trdrop-release.7z trdrop-release-$Env:SHORT_SHA.7z
