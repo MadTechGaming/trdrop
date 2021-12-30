@@ -20,6 +20,7 @@ jobs:
           $opencv_ver="4.5.1"
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver}/opencv-${opencv_ver}.7z -o C:\downloads\opencv-${opencv_ver}.7z
           7z -r x C:\downloads\opencv-${opencv_ver}.7z -oc:\downloads\
+          echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver}" >> $env:GITHUB_ENV
 
       - name: Download Qt
         uses: jurplel/install-qt-action@v2
@@ -29,9 +30,8 @@ jobs:
           dir: C:\
           tools: tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.
 
-      - name: Add OpenCV, Qt and MinGW to environment variable
+      - name: Add Qt and MinGW to environment variable
         run: |
-          echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver}" >> $env:GITHUB_ENV
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
 
