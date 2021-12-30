@@ -18,8 +18,9 @@ jobs:
         run: |
           mkdir C:\downloads
           $opencv_ver="4.5.1"
-          curl -fL https://github.com/opencv/opencv/archive/${opencv_ver}.zip -o C:\downloads\opencv-${opencv_ver}.zip
-          7z -r x C:\downloads\opencv-${opencv_ver}.zip -oc:\downloads\
+          curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver}/opencv-${opencv_ver}.7z -o C:\downloads\opencv-${opencv_ver}.7z
+          7z -r x C:\downloads\opencv-${opencv_ver}.7z -oc:\downloads\opencv-${opencv_ver}\
+          ls C:\downloads\opencv-${opencv_ver}\build_64
           echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver}" >> $env:GITHUB_ENV
 
       - name: Download Qt
@@ -29,15 +30,6 @@ jobs:
           arch: win64_mingw81
           dir: C:\
           tools: tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.
-
-      # Remote go brr
-      - name: Compile OpenCV
-        run: |
-          mkdir C:\downloads\opencv-4.5.1\build_64
-          cmake -G "MinGW Makefiles" -S C:\downloads\opencv-4.5.1\ -B C:\downloads\opencv-4.5.1\build_64\ -D BUILD_JAVA=OFF -D WITH_QT=ON -D WITH_OPENGL=ON
-          cd $env:OpenCV_DIR\build_64
-          mingw32-make -j 8
-          mingw32-make install
 
       - name: Add Qt and MinGW to environment variable
         run: |
