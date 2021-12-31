@@ -68,10 +68,12 @@ jobs:
         if: steps.cache1.outputs.cache-hit != 'true'
         run: Copy-Item C:\build_temp\*.o, *.c, *.cpp, *.h release
 
+      - name: Restore cache for building
+        if: steps.cache1.outputs.cache-hit != 'true'
+        run: mkdir C:\build_temp
+
       - name: Build Trdrop
         run: |
-          qmake -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
-          mingw32-make -f Makefile.Release
           qmake -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
           mingw32-make -f Makefile.Release
 
@@ -85,7 +87,6 @@ jobs:
 
       - name: Cleanup for packaging
         run: |
-          mkdir C:\build_temp
           cd release
           Move-Item *.o, *.c, *.cpp, *.h C:\build_temp\
           Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
