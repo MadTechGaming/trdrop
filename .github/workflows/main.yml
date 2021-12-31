@@ -41,7 +41,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mkdir C:\downloads
-          $opencv_ver1=$env:{opencv_ver}
+          $opencv_ver1=${env:opencv_ver}
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver1}/opencv-${opencv_ver1}.7z -o C:\downloads\opencv-${opencv_ver1}.7z
           7z -r x C:\downloads\opencv-${opencv_ver1}.7z -oc:\downloads\
 
