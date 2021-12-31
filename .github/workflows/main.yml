@@ -28,7 +28,7 @@ jobs:
         with:
           path: |
             C:\downloads\opencv-4.5.1\
-            temp\
+            #temp\
           key: ${{ runner.os }}-Qt5152-OpenCV451
 
       - name: Restore tar
@@ -97,7 +97,7 @@ jobs:
           Move-Item *.o ..\temp
           Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
           7z a -m0=LZMA2 -mx9 ..\trdrop-release-${env:SHORT_SHA}.7z
-
+          ls temp\
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
