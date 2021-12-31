@@ -74,6 +74,7 @@ jobs:
           ls release
           cd release
           Move-Item -Force *.o, *.c, *.cpp, *.h C:\build_temp
+          ls C:\build_temp
           ls
 
       - name: Prepare trdrop for artifact
