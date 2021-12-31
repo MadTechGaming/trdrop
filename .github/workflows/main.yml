@@ -28,7 +28,7 @@ jobs:
         with:
           path: |
             C:\downloads\opencv-4.5.1\
-            ${{ env.GITHUB_WORKSPACE }}\temp
+            temp\
           key: ${{ runner.os }}-Qt5152-OpenCV451
 
       - name: Get short SHA and set Qt version
