@@ -4,12 +4,15 @@ on: [ push, pull_request ]
 
 jobs:
   build:
-    runs-on: windows-2016
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
+      - name: Workaround tar path failure
+        run: copy-item "C:\Program Files\Git\usr\bin\tar.exe" C:\Windows\System32\tar.exe
 
       - uses: actions/cache@v2
         id: cache
