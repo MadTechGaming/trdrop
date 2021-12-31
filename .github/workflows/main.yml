@@ -66,15 +66,14 @@ jobs:
           $qtver1=$env:qtver
           $opencv_ver1=${env:opencv_ver}
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
-          echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver}" >> $env:GITHUB_ENV
+          echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver1}" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
 
       - name: Restore cache for building
         if: steps.cache.outputs.cache-hit == 'true'
         run: Copy-Item temp\*.o release\
 
-      - name: Restore cache for building
-        if: steps.cache.outputs.cache-hit == 'true'
+      - name: Restore tar
         run: Rename-item C:\Windows\System32\tar.exe.bak C:\Windows\System32\tar.exe
 
       - name: Build Trdrop
