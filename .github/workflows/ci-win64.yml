@@ -15,14 +15,14 @@ jobs:
         id: cache0
         with:
           path: C:\downloads\opencv-4.5.1
-          key: ${{ runner.os }}-OpenCV451
+          key: ${{ runner.os }}-OpenCV
 
       - name: Cache Object files
         uses: actions/cache@v1
         id: cache1
         with:
           path: C:\build_temp
-          key: ${{ runner.os }}-ReleaseObjectFiles3
+          key: ${{ runner.os }}-ObjectFiles
 
       - name: Get short SHA and set Qt version
         run: |
@@ -67,9 +67,8 @@ jobs:
           qmake -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler" "OBJECTS_DIR=C:\build_temp" "MOC_DIR=C:\build_temp"
           mingw32-make -f Makefile.Release
 
-      - name: ugh
+      - name: Move all unnecessary files to temporary folder
         run: |
-          ls release
           cd release
           Move-Item -Force *.o, *.c, *.cpp, *.h C:\build_temp
           ls C:\build_temp
