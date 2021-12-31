@@ -12,14 +12,14 @@ jobs:
           fetch-depth: 0
 
       - uses: actions/cache@v1
-        id: cache
+        id: cache0
         with:
           path: |
             C:\downloads\opencv-4.5.1\
           key: ${{ runner.os }}-OpenCV451
 
       - uses: actions/cache@v1
-        id: cache
+        id: cache1
         with:
           path: |
             C:\build_temp\
@@ -32,7 +32,7 @@ jobs:
           echo opencv_ver=4.5.1 >> $env:GITHUB_ENV
 
       - name: Download Precompiled OpenCV libs
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache0.outputs.cache-hit != 'true'
         run: |
           mkdir C:\downloads
           $opencv_ver1=${env:opencv_ver}
@@ -64,7 +64,7 @@ jobs:
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
 
       - name: Restore cache for building
-        if: steps.cache.outputs.cache-hit == 'true'
+        if: steps.cache1.outputs.cache-hit == 'true'
         run: Copy-Item C:\build_temp\*.o release\
 
       - name: Build Trdrop
