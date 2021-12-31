@@ -43,7 +43,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: C:\Qt
-          key: ${{ runner.os }}-QtCache
+          key: ${{ runner.os }}-Qt-Cache
 
       - name: Download Qt
         uses: jurplel/install-qt-action@v2
