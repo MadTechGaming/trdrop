@@ -73,9 +73,3 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-      - name: Upload Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: github.event_name != 'pull_request'
-        run: gh release create $env:SHORT_SHA "trdrop-release-$env:SHORT_SHA.7z" --target $env:GITHUB_SHA -t "Trdrop Release - $env:SHORT_SHA"
-
