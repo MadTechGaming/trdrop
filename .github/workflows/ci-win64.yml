@@ -21,7 +21,7 @@ jobs:
         uses: actions/cache@v1
         id: cache0
         with:
-          path: C:\downloads\opencv${ env.opencv_ver }}
+          path: C:\downloads\opencv${{ env.opencv_ver }}
           key: ${{ runner.os }}-OpenCVCache
 
       - name: Cache Object files
