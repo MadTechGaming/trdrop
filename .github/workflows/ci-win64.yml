@@ -15,6 +15,7 @@ jobs:
           echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" >> $env:GITHUB_ENV
           echo qtver=5.15.2 >> $env:GITHUB_ENV
           echo opencv_ver=4.5.1 >> $env:GITHUB_ENV
+          mkdir C:\downloads
 
       - name: Cache OpenCV
         uses: actions/cache@v1
