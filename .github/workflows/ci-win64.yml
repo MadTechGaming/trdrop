@@ -14,16 +14,14 @@ jobs:
         uses: actions/cache@v1
         id: cache0
         with:
-          path: |
-            C:\downloads\opencv-4.5.1\
+          path: C:\downloads\opencv-4.5.1
           key: ${{ runner.os }}-OpenCV451
 
       - name: Cache Object files
         uses: actions/cache@v1
         id: cache1
         with:
-          path: |
-            C:\build_temp\
+          path: C:\build_temp
           key: ${{ runner.os }}-ReleaseObjectFiles3
 
       - name: Get short SHA and set Qt version
@@ -92,4 +90,18 @@ jobs:
           Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
           7z a -m0=LZMA2 -mx9 ..\trdrop-release-${env:SHORT_SHA}.7z
           ls C:\build_temp\
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: trdrop-release-${{ env.SHORT_SHA }}
+          path: release/*
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Upload Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name != 'pull_request'
+        run: gh release create $env:SHORT_SHA "trdrop-release-$env:SHORT_SHA.7z" --target $env:GITHUB_SHA -t "Trdrop Release - $env:SHORT_SHA"
 
