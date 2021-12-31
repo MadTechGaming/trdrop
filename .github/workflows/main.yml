@@ -27,7 +27,6 @@ jobs:
         with:
           path: |
             C:\downloads\opencv-4.5.1\
-            C:\Qt\
             ${{ env.GITHUB_WORKSPACE }}\temp
           key: ${{ runner.os }}-Qt5152-OpenCV451
 
@@ -45,10 +44,17 @@ jobs:
           7z -r x C:\downloads\opencv-${opencv_ver}.7z -oc:\downloads\
           echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver}" >> $env:GITHUB_ENV
 
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1 # not v2!
+        with:
+          path: C:\Qt\
+          key: ${{ runner.os }}-QtCache
+
       - name: Download Qt
         uses: jurplel/install-qt-action@v2
-        if: steps.cache.outputs.cache-hit != 'true'
         with:
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
           version: ${{ env.qtver }}
           arch: win64_mingw81
           dir: C:\
