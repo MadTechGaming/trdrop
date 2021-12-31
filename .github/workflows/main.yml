@@ -20,6 +20,7 @@ jobs:
           $acl = Get-ACL $notepadExe
           $acl.AddAccessRule($fullAdminPermissions)
           Set-Acl $notepadExe $acl
+          Rename-item C:\Windows\System32\tar.exe C:\Windows\System32\tar.exe.bak
           copy-item "C:\Program Files\Git\usr\bin\tar.exe" C:\Windows\System32\tar.exe
 
       - uses: actions/cache@v2
@@ -45,7 +46,7 @@ jobs:
 
       - name: Cache Qt
         id: cache-qt
-        uses: actions/cache@v2
+        uses: actions/cache@v1
         with:
           path: C:\Qt
           key: ${{ runner.os }}-QtCache
@@ -68,8 +69,11 @@ jobs:
 
       - name: Restore cache for building
         if: steps.cache.outputs.cache-hit == 'true'
-        run: |
-           Copy-Item temp\*.o release\
+        run: Copy-Item temp\*.o release\
+
+      - name: Restore cache for building
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: Rename-item C:\Windows\System32\tar.exe.bak C:\Windows\System32\tar.exe
 
       - name: Build Trdrop
         run: |
