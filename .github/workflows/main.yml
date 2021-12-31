@@ -65,7 +65,7 @@ jobs:
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
 
       - name: Restore cache for building
-        if: steps.cache1.outputs.cache-hit =! 'true'
+        if: steps.cache1.outputs.cache-hit != 'true'
         run: Copy-Item C:\build_temp\*.o, *.c, *.cpp, *.h release
 
       - name: Build Trdrop
