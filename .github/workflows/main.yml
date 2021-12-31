@@ -59,6 +59,7 @@ jobs:
           $qtver1=$env:qtver
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
+          echo PATH="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
           echo IQTA_TOOLS="C:\Qt\Tools" >> $env:GITHUB_ENV
           echo PATH="C:\Qt\${qtver1}\mingw81_64\bin" >> $env:GITHUB_ENV
           echo QT_PLUGIN_PATH="C:\Qt\${qtver1}\mingw81_64\plugins" >> $env:GITHUB_ENV
