@@ -5,6 +5,8 @@ on: [ push, pull_request ]
 jobs:
   build:
     runs-on: windows-latest
+
+     steps:
       - name: Workaround tar path failure
       # Grant local admins full access to the system file (very sus..)
       # https://kimconnect.com/powershell-how-to-replace-a-system-file-for-experimentation-purposes/
