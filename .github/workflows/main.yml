@@ -42,7 +42,6 @@ jobs:
           $opencv_ver="4.5.1"
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver}/opencv-${opencv_ver}.7z -o C:\downloads\opencv-${opencv_ver}.7z
           7z -r x C:\downloads\opencv-${opencv_ver}.7z -oc:\downloads\
-          echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver}" >> $env:GITHUB_ENV
 
       - name: Cache Qt
         id: cache-qt
@@ -64,6 +63,7 @@ jobs:
         run: |
           $qtver1=$env:qtver
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
+          echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver}" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
 
       - name: Restore cache for building
