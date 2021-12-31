@@ -11,6 +11,10 @@ jobs:
       # Grant local admins full access to the system file (very sus..)
       # https://kimconnect.com/powershell-how-to-replace-a-system-file-for-experimentation-purposes/
         run: |
-          Set-Acl C:\Windows\System32\tar.exe .AddAccessRule New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","Full","Allow")
+          $notepadExe='C:\Windows\System32\tar.exe'
+          $fullAdminPermissions = New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","Full","Allow")
+          $acl = Get-ACL $notepadExe
+          $acl.AddAccessRule($fullAdminPermissions)
+          Set-Acl $notepadExe $acl
           Rename-item C:\Windows\System32\tar.exe C:\Windows\System32\tar.exe.bak
           copy-item "C:\Program Files\Git\usr\bin\tar.exe" C:\Windows\System32\tar.exe
