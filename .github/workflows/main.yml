@@ -94,11 +94,3 @@ jobs:
           7z a -m0=LZMA2 -mx9 ..\trdrop-release-${env:SHORT_SHA}.7z
           ls C:\build_temp\
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: trdrop-release-${{ env.SHORT_SHA }}
-          path: release/*
-          if-no-files-found: error
-          retention-days: 1
-
