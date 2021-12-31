@@ -12,14 +12,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/cache@v1
+      - name: Cache OpenCV
+        uses: actions/cache@v1
         id: cache0
         with:
           path: |
             C:\downloads\opencv-4.5.1\
           key: ${{ runner.os }}-OpenCV451
 
-      - uses: actions/cache@v1
+      - name: Cache Object files
+        uses: actions/cache@v1
         id: cache1
         with:
           path: |
