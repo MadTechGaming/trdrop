@@ -65,7 +65,7 @@ jobs:
 
       - name: Restore cache for building
         if: steps.cache1.outputs.cache-hit == 'true'
-        run: Copy-Item C:\build_temp\*.o *.c, *.cpp, *.h release
+        run: Copy-Item C:\build_temp\*.o, *.c, *.cpp, *.h release
 
       - name: Build Trdrop
         run: |
@@ -84,7 +84,7 @@ jobs:
         run: |
           mkdir C:\build_temp
           cd release
-          Move-Item *.o *.c, *.cpp, *.h C:\build_temp\
+          Move-Item *.o, *.c, *.cpp, *.h C:\build_temp\
           Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
           7z a -m0=LZMA2 -mx9 ..\trdrop-release-${env:SHORT_SHA}.7z
           ls C:\build_temp\
@@ -96,5 +96,4 @@ jobs:
           path: release/*
           if-no-files-found: error
           retention-days: 1
-
 
