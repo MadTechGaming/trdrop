@@ -10,30 +10,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Get short SHA and set Qt + OpenCV version
+        run: |
+          echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" >> $env:GITHUB_ENV
+          echo qtver=5.15.2 >> $env:GITHUB_ENV
+          echo opencv_ver=4.5.1 >> $env:GITHUB_ENV
+
       - name: Cache OpenCV
         uses: actions/cache@v1
         id: cache0
         with:
-          path: C:\downloads\opencv-4.5.1
-          key: ${{ runner.os }}-OpenCV
+          path: C:\downloads\opencv${ env.opencv_ver }}
+          key: ${{ runner.os }}-OpenCVCache
 
       - name: Cache Object files
         uses: actions/cache@v1
         id: cache1
         with:
           path: C:\build_temp
-          key: ${{ runner.os }}-ObjectFiles
-
-      - name: Get short SHA and set Qt version
-        run: |
-          echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" >> $env:GITHUB_ENV
-          echo qtver=5.15.2 >> $env:GITHUB_ENV
-          echo opencv_ver=4.5.1 >> $env:GITHUB_ENV
+          key: ${{ runner.os }}-ObjectFilesCache
 
       - name: Download Precompiled OpenCV libs
         if: steps.cache0.outputs.cache-hit != 'true'
         run: |
-          mkdir C:\downloads
           $opencv_ver1=${env:opencv_ver}
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver1}/opencv-${opencv_ver1}.7z -o C:\downloads\opencv-${opencv_ver1}.7z
           7z -r x C:\downloads\opencv-${opencv_ver1}.7z -oc:\downloads\
