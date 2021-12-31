@@ -35,6 +35,7 @@ jobs:
 
       - name: Download Qt
         uses: jurplel/install-qt-action@v2
+        if: steps.cache.outputs.cache-hit != 'true'
         with:
           version: ${{ env.qtver }}
           arch: win64_mingw81
@@ -46,6 +47,9 @@ jobs:
           $qtver1=$env.qtver
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
+          echo IQTA_TOOLS: C:\Qt\Tools
+          echo Qt5_Dir: C:\Qt\${qtver1}\mingw81_64
+          echo QT_PLUGIN_PATH: C:\Qt\${qtver1}\mingw81_64\plugins
 
       - name: Build Trdrop
         run: |
