@@ -66,6 +66,11 @@ jobs:
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
 
+      - name: Restore cache for building
+        if: steps.cache.outputs.cache-hit == 'true'
+        run: |
+           Copy-Item temp\*.o release\
+
       - name: Build Trdrop
         run: |
           qmake -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
@@ -87,7 +92,7 @@ jobs:
           Move-Item *.o ..\temp
           Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
           7z a -m0=LZMA2 -mx9 ..\trdrop-release-${env:SHORT_SHA}.7z
-          Copy-Item ..\temp\*.o \
+
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
