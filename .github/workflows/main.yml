@@ -19,8 +19,10 @@ jobs:
             C:\Qt\
           key: ${{ runner.os }}-Qt5152-OpenCV451
 
-      - name: Get short SHA
-        run: echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" >> $env:GITHUB_ENV
+      - name: Get short SHA and set Qt version
+        run: |
+          echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" >> $env:GITHUB_ENV
+          echo qtver=5.15.2 >> $env:GITHUB_ENV
 
       - name: Download Precompiled OpenCV libs
         if: steps.cache.outputs.cache-hit != 'true'
@@ -35,15 +37,19 @@ jobs:
         uses: jurplel/install-qt-action@v2
         if: steps.cache.outputs.cache-hit != 'true'
         with:
-          version: 5.15.2
+          version: ${{ env.qtver }}
           arch: win64_mingw81
           dir: C:\
           tools: tools_ifw,4.1.1,qt.tools.ifw.41 tools_qtcreator,5.0.2-0,qt.tools.qtcreator,qt.tools.
 
       - name: Add Qt and MinGW to environment variable
         run: |
+          $qtver1=$env.qtver
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
+          echo IQTA_TOOLS: C:\Qt\Tools
+          echo Qt5_Dir: C:\Qt\${qtver}\mingw81_64
+          echo QT_PLUGIN_PATH: C:\Qt\${qtver}\mingw81_64\plugins
 
       - name: Build Trdrop
         run: |
