@@ -11,29 +11,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Workaround tar path failure
-      # Grant local admins full access to the system file
-      # (very sussy workaround..)
-      # https://kimconnect.com/powershell-how-to-replace-a-system-file-for-experimentation-purposes/
-        run: |
-          $GitExe='C:\Windows\System32\tar.exe'
-          $fullAdminPermissions = New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","Full","Allow")
-          $acl = Get-ACL $GitExe
-          $acl.AddAccessRule($fullAdminPermissions)
-          Set-Acl $GitExe $acl
-          Copy-item C:\Windows\System32\tar.exe C:\Windows\System32\tar.exe.bak
-          Copy-item "C:\Program Files\Git\usr\bin\tar.exe" C:\Windows\System32\tar.exe
-
-      - uses: actions/cache@v2
+      - uses: actions/cache@v1
         id: cache
         with:
           path: |
             C:\downloads\opencv-4.5.1\
             temp\
           key: ${{ runner.os }}-ReleaseObjFiles-OpenCV451
-
-      - name: Restore tar
-        run: copy-item C:\Windows\System32\tar.exe.bak C:\Windows\System32\tar.exe
 
       - name: Get short SHA and set Qt version
         run: |
@@ -107,5 +91,4 @@ jobs:
           path: release/*
           if-no-files-found: error
           retention-days: 1
-
 
