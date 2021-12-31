@@ -16,7 +16,7 @@ jobs:
         with:
           path: |
             C:\downloads\opencv-4.5.1\
-            ${{ env.github_workspace }}\temp\
+            C:\build_temp\
           key: ${{ runner.os }}-ReleaseObjFiles-OpenCV451
 
       - name: Get short SHA and set Qt version
@@ -59,7 +59,7 @@ jobs:
 
       - name: Restore cache for building
         if: steps.cache.outputs.cache-hit == 'true'
-        run: Copy-Item temp\*.o release\
+        run: Copy-Item C:\build_temp\*.o release\
 
       - name: Build Trdrop
         run: |
@@ -77,12 +77,12 @@ jobs:
       - name: Cleanup for packaging
         run: |
           Remove-Item release\* -include *.c, *.cpp, *.h -exclude *.exe, *.dll
-          mkdir temp
+          mkdir C:\build_temp
           cd release
-          Move-Item *.o ..\temp
+          Move-Item *.o C:\build_temp\
           Remove-Item -Recurse -Force audio, bearer, iconengines, mediaservice, playlistformats, qmltooling, QtGraphicalEffects, styles, translations, D3Dcompiler_47.dll, opengl32sw.dll, libGLESv2.dll
           7z a -m0=LZMA2 -mx9 ..\trdrop-release-${env:SHORT_SHA}.7z
-          ls ..\temp
+          ls C:\build_temp\
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
