@@ -12,9 +12,8 @@ jobs:
       # https://kimconnect.com/powershell-how-to-replace-a-system-file-for-experimentation-purposes/
         run: |
           $notepadExe='C:\Windows\System32\tar.exe'
-          $fullAdminPermissions = New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","Full","Allow")
           $acl = Get-ACL $notepadExe
-          $acl.AddAccessRule($fullAdminPermissions)
+          $acl.AddAccessRule(New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","Full","Allow"))
           Set-Acl $notepadExe $acl
           Rename-item C:\Windows\System32\tar.exe C:\Windows\System32\tar.exe.bak
           copy-item "C:\Program Files\Git\usr\bin\tar.exe" C:\Windows\System32\tar.exe
