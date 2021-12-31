@@ -17,7 +17,7 @@ jobs:
           path: |
             C:\downloads\opencv-4.5.1\
             C:\build_temp\
-          key: ${{ runner.os }}-ReleaseObjFiles-OpenCV451
+          key: ${{ runner.os }}-ReleaseObjectFiles-OpenCV451
 
       - name: Get short SHA and set Qt version
         run: |
