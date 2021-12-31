@@ -12,8 +12,9 @@ jobs:
           fetch-depth: 0
 
       - name: Workaround tar path failure
+      # Grant local admins full access to the system file (very sus..)
+      # https://kimconnect.com/powershell-how-to-replace-a-system-file-for-experimentation-purposes/
         run: |
-          # Grant local admins full access to the system file
           $notepadExe='C:\Windows\System32\tar.exe'
           $fullAdminPermissions = New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","Full","Allow")
           $acl = Get-ACL $notepadExe
@@ -57,9 +58,9 @@ jobs:
           $qtver1=$env:qtver
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
-          echo IQTA_TOOLS: C:\Qt\Tools
-          echo Qt5_Dir: C:\Qt\${qtver1}\mingw81_64
-          echo QT_PLUGIN_PATH: C:\Qt\${qtver1}\mingw81_64\plugins
+          echo IQTA_TOOLS: C:\Qt\Tools >> $env:GITHUB_ENV
+          echo Qt5_Dir: C:\Qt\${qtver1}\mingw81_64 >> $env:GITHUB_ENV
+          echo QT_PLUGIN_PATH: C:\Qt\${qtver1}\mingw81_64\plugins >> $env:GITHUB_ENV
 
       - name: Build Trdrop
         run: |
