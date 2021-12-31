@@ -31,6 +31,9 @@ jobs:
             temp\
           key: ${{ runner.os }}-Qt5152-OpenCV451
 
+      - name: Restore tar
+        run: copy-item C:\Windows\System32\tar.exe.bak C:\Windows\System32\tar.exe
+
       - name: Get short SHA and set Qt version
         run: |
           echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" >> $env:GITHUB_ENV
@@ -72,9 +75,6 @@ jobs:
       - name: Restore cache for building
         if: steps.cache.outputs.cache-hit == 'true'
         run: Copy-Item temp\*.o release\
-
-      - name: Restore tar
-        run: copy-item C:\Windows\System32\tar.exe.bak C:\Windows\System32\tar.exe
 
       - name: Build Trdrop
         run: |
