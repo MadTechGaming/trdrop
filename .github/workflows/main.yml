@@ -69,6 +69,7 @@ jobs:
         run: |
           qmake -o Makefile trdrop\trdrop.pro -spec win32-g++ "CONFIG+=qtquickcompiler" "OBJECTS_DIR=C:\build_temp" "MOC_DIR=C:\build_temp"
           mingw32-make -f Makefile.Release
+          ls release
 
       - name: Prepare trdrop for artifact
         run: |
