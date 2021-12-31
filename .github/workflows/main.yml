@@ -1,6 +1,6 @@
 name: (Windows x64) Build and publish
 
-#on: [push, pull_request]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -15,12 +15,12 @@ jobs:
       # Grant local admins full access to the system file (very sus..)
       # https://kimconnect.com/powershell-how-to-replace-a-system-file-for-experimentation-purposes/
         run: |
-          $notepadExe='C:\Windows\System32\tar.exe'
+          $GitExe='C:\Windows\System32\tar.exe'
           $fullAdminPermissions = New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","Full","Allow")
-          $acl = Get-ACL $notepadExe
+          $acl = Get-ACL $GitExe
           $acl.AddAccessRule($fullAdminPermissions)
-          Set-Acl $notepadExe $acl
-          Rename-item C:\Windows\System32\tar.exe C:\Windows\System32\tar.exe.bak
+          Set-Acl $GitExe $acl
+          Copy-item C:\Windows\System32\tar.exe C:\Windows\System32\tar.exe.bak
           copy-item "C:\Program Files\Git\usr\bin\tar.exe" C:\Windows\System32\tar.exe
 
       - uses: actions/cache@v2
@@ -74,7 +74,7 @@ jobs:
         run: Copy-Item temp\*.o release\
 
       - name: Restore tar
-        run: Rename-item C:\Windows\System32\tar.exe.bak C:\Windows\System32\tar.exe
+        run: copy-item C:\Windows\System32\tar.exe.bak C:\Windows\System32\tar.exe
 
       - name: Build Trdrop
         run: |
