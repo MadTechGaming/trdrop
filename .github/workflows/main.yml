@@ -54,7 +54,7 @@ jobs:
 
       - name: Add Qt and MinGW to environment variable
         run: |
-          $qtver1=$env.qtver
+          $qtver1=$env:qtver
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
           echo IQTA_TOOLS: C:\Qt\Tools
