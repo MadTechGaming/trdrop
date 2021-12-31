@@ -25,7 +25,7 @@ jobs:
         with:
           path: |
             C:\build_temp\
-          key: ${{ runner.os }}-ReleaseObjectFiles2
+          key: ${{ runner.os }}-ReleaseObjectFiles3
 
       - name: Get short SHA and set Qt version
         run: |
