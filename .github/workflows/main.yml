@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: Get short SHA and set Qt + OpenCV version
         run: |
-          ls
+          ls C:\
           New-Item -ItemType SymbolicLink -Path "C:\msys64" -Target "C:\msys64"
