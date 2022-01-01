@@ -7,9 +7,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Get short SHA and set Qt + OpenCV version
         run: |
-          symlink
+          ls
+          New-Item -ItemType SymbolicLink -Path "C:\msys64" -Target "C:\msys64"
