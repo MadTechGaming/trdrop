@@ -11,3 +11,5 @@ jobs:
         run: |
           ls C:\
           New-Item -ItemType SymbolicLink -Path "C:\msys2" -Target "C:\msys64"
+          ls C:\msys64
+          ls C:\msys2
