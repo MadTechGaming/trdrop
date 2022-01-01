@@ -16,28 +16,13 @@ jobs:
           echo qtver=5.15.2 >> $env:GITHUB_ENV
           echo opencv_ver=4.5.1 >> $env:GITHUB_ENV
 
-      - name: Cache Object files
-        uses: actions/cache@v1
-        id: cache1
-        with:
-          path: C:\build_temp
-          key: ${{ runner.os }}-ObjectFilesCache
-
-      - name: Restore cache
-        if: steps.cache1.outputs.cache-hit == 'true'
-        run: |
-          mkdir release
-          cd c:\build_temp
-          Copy-Item *.o, *.c, *.cpp, *.h ${env:GITHUB_WORKSPACE}\release
-
       - name: Download Precompiled OpenCV libs
         run: |
           mkdir C:\downloads
           $opencv_ver1=${env:opencv_ver}
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver1}/opencv-${opencv_ver1}.7z -o C:\downloads\opencv-${opencv_ver1}.7z
           7z -r x C:\downloads\opencv-${opencv_ver1}.7z -oc:\downloads\
-          New-Item -ItemType SymbolicLink -Path C:\opencv-${opencv_ver1} -Target C:\downloads\opencv-${opencv_ver1}
-
+          New-Item -ItemType SymbolicLink -Path C:\opencv-${opencv_ver1} -Target C:\downloads\opencv-${opencv_ver1} # fallback
 
       - name: Cache Qt
         id: cache-qt
@@ -97,4 +82,10 @@ jobs:
           name: trdrop-release-${{ env.SHORT_SHA }}
           path: release/*
           if-no-files-found: error
+
+      - name: Upload Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name != 'pull_request'
+        run: gh release create $env:SHORT_SHA "trdrop-release-$env:SHORT_SHA.7z" --target $env:GITHUB_SHA -t "Trdrop Release - $env:SHORT_SHA"
 
