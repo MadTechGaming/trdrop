@@ -57,9 +57,7 @@ jobs:
       - name: Add Qt and MinGW to environment variable
         run: |
           $qtver1=$env:qtver
-          $opencv_ver1=${env:opencv_ver}
           echo Qt_Install="C:\Qt" >> $env:GITHUB_ENV
-          echo OpenCV_DIR="C:\downloads\opencv-${opencv_ver1}" >> $env:GITHUB_ENV
           echo MinGWBin="C:\msys64\mingw64\bin" >> $env:GITHUB_ENV
 
       - name: Build Trdrop
