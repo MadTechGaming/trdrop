@@ -1,5 +1,5 @@
 name: (Windows x64) Build and publish
-# ugh
+
 on: [push, pull_request]
 
 jobs:
@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: C:\Qt
-          key: ${{ runner.os }}-Qt-Cache
+          key: ${{ runner.os }}-Qt-${{ env.qtver }}-Cache
 
       - name: Download Qt
         uses: jurplel/install-qt-action@v2
@@ -95,5 +95,5 @@ jobs:
           name: trdrop-release-${{ env.SHORT_SHA }}
           path: release/*
           if-no-files-found: error
-          retention-days: 90
+          retention-days: 89
 
