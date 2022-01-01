@@ -95,5 +95,5 @@ jobs:
           name: trdrop-release-${{ env.SHORT_SHA }}
           path: release/*
           if-no-files-found: error
-          retention-days: 89
+          retention-days: 88
 
