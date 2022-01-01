@@ -103,7 +103,7 @@ jobs:
           name: trdrop-release-${{ env.SHORT_SHA }}
           path: release/*
           if-no-files-found: error
-          retention-days: 1
+          retention-days: 90
 
       - name: Upload Release
         env:
