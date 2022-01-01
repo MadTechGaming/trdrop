@@ -17,13 +17,6 @@ jobs:
           echo opencv_ver=4.5.1 >> $env:GITHUB_ENV
           mkdir C:\downloads
 
-      - name: Cache OpenCV
-        uses: actions/cache@v1
-        id: cache0
-        with:
-          path: C:\downloads\opencv-${{ env.opencv_ver }}
-          key: ${{ runner.os }}-OpenCV-Cache
-
       - name: Cache Object files
         uses: actions/cache@v1
         id: cache1
@@ -39,7 +32,6 @@ jobs:
           Copy-Item *.o, *.c, *.cpp, *.h ${env:GITHUB_WORKSPACE}\release
 
       - name: Download Precompiled OpenCV libs
-        if: steps.cache0.outputs.cache-hit != 'true'
         run: |
           $opencv_ver1=${env:opencv_ver}
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver1}/opencv-${opencv_ver1}.7z -o C:\downloads\opencv-${opencv_ver1}.7z
