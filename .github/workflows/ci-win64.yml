@@ -15,7 +15,6 @@ jobs:
           echo "SHORT_SHA=$($env:GITHUB_SHA.SubString(0,7))" >> $env:GITHUB_ENV
           echo qtver=5.15.2 >> $env:GITHUB_ENV
           echo opencv_ver=4.5.1 >> $env:GITHUB_ENV
-          mkdir C:\downloads
 
       - name: Cache Object files
         uses: actions/cache@v1
@@ -33,6 +32,7 @@ jobs:
 
       - name: Download Precompiled OpenCV libs
         run: |
+          mkdir C:\downloads
           $opencv_ver1=${env:opencv_ver}
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver1}/opencv-${opencv_ver1}.7z -o C:\downloads\opencv-${opencv_ver1}.7z
           7z -r x C:\downloads\opencv-${opencv_ver1}.7z -oc:\downloads\
