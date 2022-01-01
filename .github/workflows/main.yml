@@ -37,6 +37,8 @@ jobs:
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver1}/opencv-${opencv_ver1}.7z -o C:\downloads\opencv-${opencv_ver1}.7z
           7z -r x C:\downloads\opencv-${opencv_ver1}.7z -oc:\downloads\
           ls C:\downloads\opencv-${opencv_ver1}\build_64
+          ls C:\downloads\opencv-${opencv_ver1}\opencv2\core\
+          ls C:\downloads\opencv-${opencv_ver1}\
 
       - name: Cache Qt
         id: cache-qt
