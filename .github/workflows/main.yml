@@ -36,6 +36,7 @@ jobs:
           $opencv_ver1=${env:opencv_ver}
           curl -fL https://github.com/illusion0001/opencv-build/releases/download/${opencv_ver1}/opencv-${opencv_ver1}.7z -o C:\downloads\opencv-${opencv_ver1}.7z
           7z -r x C:\downloads\opencv-${opencv_ver1}.7z -oc:\downloads\
+          ls C:\downloads\opencv-${opencv_ver1}\build_64
 
       - name: Cache Qt
         id: cache-qt
@@ -95,5 +96,5 @@ jobs:
           name: trdrop-release-${{ env.SHORT_SHA }}
           path: release/*
           if-no-files-found: error
-          retention-days: 88
+          retention-days: 1
 
