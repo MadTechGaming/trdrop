@@ -291,7 +291,7 @@ private:
 
         _enable_bg_shadow.setName("Enable Graph Background Shadow");
         _enable_bg_shadow.setTooltip("Improves readability of graph.");
-        _enable_bg_shadow.setValue(true);
+        _enable_bg_shadow.setValue(false);
 
         _enable_framerate_centering.setName("Enable Frame graph centering");
         _enable_framerate_centering.setTooltip("The center of the framerate and frametime plot is now showing the \"current\" framerate, not the right most edge");
