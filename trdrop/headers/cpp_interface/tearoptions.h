@@ -33,7 +33,7 @@ private:
     {
         tear_plot_color.setName("Tear plot color:");
         tear_plot_color.setTooltip("Color of the tears in the framerate plot");
-        tear_plot_color.setColor("#FAFAFA");
+        tear_plot_color.setColor("#5500ff");
 
         dismiss_tear_percentage.setName("Dismissed tear percentage:");
         dismiss_tear_percentage.setTooltip("Tears that are smaller than this amount of the image are dismissed");
