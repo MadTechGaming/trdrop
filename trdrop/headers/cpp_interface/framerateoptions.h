@@ -3,7 +3,7 @@
 
 #include <QPainter>
 #include <memory>
-#include <random>
+//#include <random>
 #include <iostream>
 #include <cstdlib>
 
@@ -76,7 +76,7 @@ private:
     {
         fps_plot_color.setName("Framerate plot color");
         fps_plot_color.setTooltip("Color of the framerate and frametime graph of this video index");
-        fps_plot_color.setColor(_get_random_color());
+        fps_plot_color.setColor("#00aa00");
 
         pixel_difference.setName("Pixel difference");
         pixel_difference.setTooltip("Pixel Difference Margin (0 - 255)\n\
@@ -87,9 +87,9 @@ private:
 
         displayed_text.setName("Framerate text:");
         displayed_text.setTooltip("The text which will be shown in the left corner of each video with the framerate");
-        displayed_text.setValue("FPS:");
+        displayed_text.setValue("");
         displayed_text.setEnabled(true);
-        displayed_text.setFont(QFont("Fjalla One", 18));
+        displayed_text.setFont(QFont("Arial", 100));
 
         displayed_text_fontsize_override = true;
 
