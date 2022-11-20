@@ -128,11 +128,11 @@ private:
     void _init_options()
     {
         // currently only 16:9
-        _resolutions_list.push_back(Resolution(QSize(960, 540),    true));
+        _resolutions_list.push_back(Resolution(QSize(960, 540),    false));
         _resolutions_list.push_back(Resolution(QSize(1280, 720),  false));
         //_resolutions_list.push_back(Resolution(QSize(1280, 1080), false));
         _resolutions_list.push_back(Resolution(QSize(1600, 900),  false));
-        _resolutions_list.push_back(Resolution(QSize(1920, 1080), false));
+        _resolutions_list.push_back(Resolution(QSize(1920, 1080), true));
         _resolutions_list.push_back(Resolution(QSize(2048, 1152), false));
         //_resolutions_list.push_back(Resolution(QSize(2560, 1440), false));
         _resolutions_list.push_back(Resolution(QSize(2560, 1440), false));
