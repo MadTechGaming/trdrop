@@ -196,11 +196,11 @@ private:
         _export_directory.setName("Export to directory");
         _export_directory.setFont(QFont("Helvetica", 15));
         _export_directory.setEnabled(true);
-        _export_directory.setValue(getDefaultMoviesDirectory().toString());
+        _export_directory.setValue("D:\\trdropoutput");
 
         _export_as_overlay.setName("Export as overlay");
         _export_as_overlay.setTooltip("Video content replaced by an alpha channel, only showing the graph (.tiff only)");
-        _export_as_overlay.setValue(false);
+        _export_as_overlay.setValue(true);
 
         _enable_live_preview.setName("Enable live preview");
         _enable_live_preview.setTooltip("Disabling this will not show the created imagesequence, but will speed up the exporting");
