@@ -91,7 +91,7 @@ private:
         displayed_text.setEnabled(true);
         displayed_text.setFont(QFont("Arial", 100));
 
-        displayed_text_fontsize_override = true;
+        displayed_text_fontsize_override = false;
 
         rel_fps_text_x_position.setName("Relative FPS Text X Pos.");
         rel_fps_text_x_position.setTooltip("");
