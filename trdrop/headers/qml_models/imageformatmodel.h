@@ -101,8 +101,8 @@ private:
     //! initial setting (jpg is default)
     void _init_options()
     {
-        _imageformat_list.push_back(ImageFormat(ImageFormatType::JPEG, true));
-        _imageformat_list.push_back(ImageFormat(ImageFormatType::TIFF, false));
+        _imageformat_list.push_back(ImageFormat(ImageFormatType::JPEG, false));
+        _imageformat_list.push_back(ImageFormat(ImageFormatType::TIFF, true));
     }
 
 //! member
